@@ -15,6 +15,7 @@ class PhotosPresenter: PhotoViewInputProtocol {
     let network: NetworkService
     var model: [PhotoModel] = []
     let factory: Factory
+    var view: PhotosViewOutputProtocol?
     
     init(factory: Factory, network: NetworkService) {
         self.factory = factory
@@ -39,7 +40,7 @@ class PhotosPresenter: PhotoViewInputProtocol {
                 self.model = self.model.sorted {$0.sizeProportion < $1.sizeProportion}
                 comletion()
             case .failure(let error):
-                print(error)
+                self.view?.alerts(error: error)
             }
         }
     }
@@ -63,7 +64,7 @@ class PhotosPresenter: PhotoViewInputProtocol {
                     completion()
                 }
             case .failure(let error):
-                print(error)
+                self.view?.alerts(error: error)
             }
         }
     }

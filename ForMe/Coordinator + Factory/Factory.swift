@@ -12,6 +12,7 @@ class Factory {
     func makePhotosModule(network: NetworkService) -> UINavigationController {
         let presenter = PhotosPresenter(factory: self, network: network)
         let view = PhotosViewController(presenter: presenter)
+        presenter.view = view
         let nvc = UINavigationController(rootViewController: view)
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()

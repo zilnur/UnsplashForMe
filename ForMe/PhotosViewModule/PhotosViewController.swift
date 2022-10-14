@@ -1,11 +1,8 @@
-//
-//  ViewController.swift
-//  ForMe
-//
-//  Created by Ильнур Закиров on 13.10.2022.
-//
-
 import UIKit
+
+protocol PhotosViewOutputProtocol {
+    func alerts(error: Error)
+}
 
 class PhotosViewController: UIViewController {
     
@@ -114,6 +111,19 @@ extension PhotosViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
+        }
+    }
+}
+
+extension PhotosViewController: PhotosViewOutputProtocol {
+    
+    //Показывает алерт в случае ошибки загрузки
+    func alerts(error: Error) {
+        let alertController = UIAlertController(title: "Произошла ошибка", message: "Ошибка: \(error.localizedDescription)", preferredStyle: .alert)
+        let alert = UIAlertAction(title: "Ок", style: .default)
+        alertController.addAction(alert)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
         }
     }
 }
