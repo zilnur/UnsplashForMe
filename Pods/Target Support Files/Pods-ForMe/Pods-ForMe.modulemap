@@ -1,0 +1,6 @@
+framework module Pods_ForMe {
+  umbrella header "Pods-ForMe-umbrella.h"
+
+  export *
+  module * { export * }
+}
